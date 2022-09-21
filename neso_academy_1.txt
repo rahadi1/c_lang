@@ -1,0 +1,160 @@
+- ############### GUIDELINES FOR ASYMPTOTIC ANALYSIS PART 1
+
+- #LOOPS
+- CASE 1:
+for(i=1;i<n;i++){
+
+ //statement
+}
+
+- OUR TASK IS TO CALCULATE HOW MANY TIMES THE "//statement" HAD EXECUTED
+- THEN WE CAN CALCULATE THE TIME COMPLEXITY
+
+- LOOP EXECUTE n TIMES
+- SO, THE TOTAL TIME IS = O(n)
+
+
+- #NESTED LOOPS
+- CASE 1:
+for(i=1;i<n;i++){           //outer loop executes n times
+
+ for(j=i;j<n;j++){          //inner loop executes n times
+
+  //statement
+ }
+}
+
+- SO, THE TOTAL TIME IS n x n = O(n^2)
+
+
+- #CONSECUTIVE STATEMENTS
+- CASE 1:
+int x=2;                    |
+int i;                      |these 3 executed 3 unit of times	 
+x = x + 1;                  |
+
+for(i=1;i<n;i++){           //this block executed n times
+
+ //statements
+}
+for(i=1;i<n;i++){           //this block executed n^2 times
+
+ for(j=i;j<n;j++){          
+
+  //statement
+ }
+}
+
+- TOTAL TIME = n^2 + n + 3 = O(n^2)
+
+f(n) = n^2 + n + 3;   LET g(n) = n^2;
+
+IS f(n) = O(g(n)) ?
+
+f(n) <= c.g(n)
+
+n^2 + n +3 <= c.n^2; Let's take c = 2
+3 <= n^2 - n
+3 <= n(n-1)
+n >= 3 or n >= 4 
+
+THIS MEANS
+f(n) <= c.g(n)
+when c = 2; n0 = 3
+
+f(n) = O(n^2)  -> meaning linear growth
+
+
+- ############### GUIDELINES FOR ASYMPTOTIC ANALYSIS PART 2
+
+- #IF-ELSE STATEMENTS
+scanf("%d",&n){
+
+ if(n == 0){
+
+  //statement
+ }
+ else{
+
+  for(int i = 0; i < n; i++){
+
+   //statements
+  }
+ }
+}
+
+- Worst case running time = Test + if part or else part (whichever is larger)
+
+- for "if" part
+- n == 0 takes constant time
+- statement inside "if" also takes constant time
+- Total time = 1 + 1 = O(1)
+
+- for "else" part
+- n == 0 takes constant time
+- statement get executed n times
+- Total time = 1 + n = O(n)
+
+- Time complexity of code above is = O(n)
+- Because the for statement takes the larger time
+
+
+- ############### LOGARITHM COMPLEXITY
+
+- LOGARITHM IS HOW MANY TIMES A PARTICULAR BASE HAS MULTIPLIED BY ITSELF
+- IN ORDER TO OBTAIN THE VALUE UNDER CONSIDERATION
+ 
+- log2(8) = 3
+- THE ABOVE LOGARITHM SAID "HOW MANY TIMES FOR 2 TO BE MULTIPLIED AND GET THE VALUE OF 8?"
+
+- LOGARITHMIC TIME COMPLEXITY IS ACHIEVED WHEN THE PROBLEM SIZE IS CUT DOWN BY A FRACTION
+- LOGARITHMIC COMPLEXITY IS LESSER THAN THE LINEAR TIME COMPLEXITY
+
+- TIME COMPLEXITY
+- CASE 1:
+for(i=1; i<n; i++){
+
+ //statements
+ i = i * 2;
+}
+
+- ITER 1; i=1; 2^0
+- ITER 2; i=2; 2^1
+- ITER 3; i=4; 2^2
+- ITER 4; i=8; 2^3
+- ITER k; i=n; 2^k-1
+
+- n = 2^k-1
+log 2 n = log 2 2^k-1
+log 2 n = k-1
+k = log 2 n + 1    -> SO, TIME COMPLEXITY = O(log 2 n)
+
+- EXAMPLE:
+for(i=1;i<32;i++){
+
+ //statements
+ i = i * 2
+}
+
+k = log 2 32 + 1
+k = 5 + 1 = 6
+
+
+- CASE 2:
+for(i=n; i<1; i++){ 
+
+ //statements
+ i = i / 2;
+}
+
+- ITER 1; i=n/2^0
+- ITER 2; i=n/2^1
+- ITER 3; i=n/2^2
+- ITER 4; i=n/2^3
+- ITER k; i=n/2^k-1=1
+
+- n/2^k-1 = 1
+- n = 2^k-1
+log 2 n = log 2 2^k-1
+log 2 n = k-1
+k = log 2 n + 1    -> SO, TIME COMPLEXITY = O(log 2 n)
