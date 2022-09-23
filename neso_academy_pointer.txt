@@ -1,0 +1,116 @@
+# VOID POINTER
+
+- Void pointer is a pointer which has no associated data type with it.
+- It can point to any data with any data type and can be typecasted to any type.
+
+- EXAMPLE:
+int main(){
+
+ int n = 10;
+ void *ptr = &n;
+
+ printf("%d",*(int*)ptr);   //typecasted to pointer to integer data type and then dereference it
+ return 0;
+}
+
+- FYI
+- We cannot dereference a void pointer
+- So that we need to typecasted it first
+
+
+
+# NULL POINTER
+
+- A null pointer is a special pointer that does not point to any memory location.
+- It represents an invalid memory location
+
+- When a null value assigned to a pointer
+- Then the pointer considered as null pointer
+- null itself is a pointer
+
+- EXAMPLE:
+int main(){
+
+ int *ptr = NULL    //This become a NULL pointer
+ return 0;
+}
+
+- Use of NULL pointer
+- 1. It is used to initializea pointer when that pointer isn't assigned any valid memory address yet.
+
+- 2. Usefull for handling errors when using malloc function
+
+- FYI:
+- 1. The value of NULL is 0.
+     We can either use NULL or 0 but this 0 is written in contect of pointers
+     And is not equivalent to the integer 0.
+
+- 2. Size of the NULL pointer depends upon the platform
+     and is similar to the size of the normal pointers.
+
+
+
+# DANGLING POINTERS
+
+- A dangling pointer is a special type pointer which points to some non-existing memory location
+
+- EXAMPLE 1:
+int main(){
+
+ int *ptr = (int*)malloc(sizeof(int));
+ ...
+ ...
+ free(ptr);          //Here, we are dealocating memory
+		     //But the pointer still points to the dealocated memory
+		     //ptr still contain the memory address but nothing value inside
+		     //that is why ptr is called dangling pointer
+ return 0;
+}
+
+- Solution to dangling pointer
+- We can assign NULL to dangling pointer.
+
+- EXAMPLE 2:
+#include <stdio.h>
+
+int* fun(){
+
+ int num = 10;               //Here lies the problem
+ return &num;                //Because "num" is a local variable
+}                            //So, the variable cannot passed to main function and become a dangling pointer
+
+int main(){
+
+ int *ptr = NULL;
+ ptr = fun();
+ printf("%d",*ptr);
+ return 0;
+}
+
+- The code above will give us "segmentation fault"
+- Which is means you are trying to read or write into an illegal memory location.
+
+
+
+# WILD POINTERS
+
+- Wild pointers are also known as uninitialized pointers
+- These pointers usually point to some arbitrary memory location
+- and may cause a program to crash or misbehave
+
+- EXAMPLE:
+int main(){
+
+ int *p;
+ p = 10;     //this will give illegal memory location and create wild pointer
+ return 0;
+}
+
+- How to avoid wild pointers?
+- 1. Initialize them with the address of a known variable
+     ptr = &var;
+
+- 2. Explicitly allocate the memory and put the values in the allocated memory
+     int *p = (int *)malloc(sizeof(int));
+     *p = 10;
+

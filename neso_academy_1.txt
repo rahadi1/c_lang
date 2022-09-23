@@ -112,7 +112,7 @@ scanf("%d",&n){
 
 - TIME COMPLEXITY
 - CASE 1:
-for(i=1; i<n; i++){
+for(i=0; i<n; i++){
 
  //statements
  i = i * 2;
@@ -158,3 +158,207 @@ for(i=n; i<1; i++){
 log 2 n = log 2 2^k-1
 log 2 n = k-1
 k = log 2 n + 1    -> SO, TIME COMPLEXITY = O(log 2 n)
+
+
+# PROBLEM 1
+
+- What is the time complexity of the following program?
+void fun(int n){
+
+ int i,j,k, count = 0;         //1 times; O(1)
+ for(i=n/2;i<=n;i++){          //2n times;
+
+  for(j=1;j+n/2<=n;j++){       //
+
+   for(k=1;k<=n;k = k*2){      //
+
+    count++;
+   }
+  }
+ }
+}
+
+- ANSWER
+first for loop
+
+iter 1; i=n/2 + 0
+iter 2: i=n/2 + 1
+
+iter k: i=n/2 + k-1 = n
+
+k - 1 = n - n/2
+k - 1 = n/2
+k = n/2 + 1     -> O(n)
+
+second for loop
+(j+n/2<=n)
+(j<=n - n/2)
+(k=j<=n/2)
+
+iter 1; j=1
+iter 2; j=2
+
+iter k; j=k = n/2
+
+k = n/2        -> O(n)
+
+third for loop
+
+iter 1; k=1 = 2^0
+iter 2; k=2 = 2^1
+iter 3; k=4 = 2^2
+
+iter p; k=2^p-1=n
+
+2^p-1 = n
+log 2 2^p-1 = log 2 n
+p-1 = log 2 n
+p = (log 2 n) + 1  -> O(log n)
+
+TIME COMPLEXITY
+n x n x log n = O(n^2 log n)
+
+
+# PROBLEM 1 part 2
+
+- What is the time complexity of the following program?
+void fun(int n){
+
+ int i,j,k, count = 0;         //1 times; O(1)
+ for(i=n/2;i<=n;i++){          //
+
+  for(j=1;j<=n;2*j){       //
+
+   for(k=1;k<=n;k = k++){      //
+
+    count++;
+   }
+  }
+ }
+}
+
+ANSWER
+
+- first for loop
+iter 1; i=n/2 + 0
+iter 2; i=n/2 + 1
+
+iter k; i=n/2 + k-1
+
+k - 1 = n/2
+k = n/2 + 1      -> O(n)
+
+- second for loop
+iter 1; j=1 2^0
+iter 2; j=2 2^1
+iter 3; j=4 2^2
+
+iter k; j=2^k-1=n
+log 2 2^k-1 = log 2 n
+k-1 = log 2 n
+k = log 2 n + 1  -> O(log n)
+
+- third for loop
+iter 1; k=1
+iter 2; k=2
+iter 3; k=3
+
+iter p; k=p=n
+p = n            -> O(n)
+
+TIME COMPLEXITY
+n x n x log n = O(n^2 log n)
+
+
+# PROBLEM 2
+
+void fun(int n){
+
+ if(n <= 1){return}
+ int i,j;                 ->O(1)
+ for(i=1;i<=n;i++){       ->O(n)
+
+  printf("Hello World");  ->O(1)
+  break;
+ }
+}
+
+TIME COMPLEXITY = O(n)
+
+
+# PROBLEM 2 part 2
+
+- What is the complexity of the following program
+
+void fun(){
+
+ int i = 1;            ->O(1)
+ while(i<n){
+
+  int j = n;           ->
+  while(j>0){
+
+   j = j / 2;
+  }
+  i = 2 * i;
+ }
+}
+
+EXPLANATION:
+first while loop
+iter 1; i=1
+iter 2; i=2*1
+iter 3; i=2*2
+iter 4; i=2*3
+
+iter k; i=2*k-1=n-1
+
+k-1=(n-1)/2
+k=n/2-1/2+1     ->O(n)
+
+second while loop
+iter 1; j=j/2   ->O(1)
+
+TIME COMPLEXITY
+1x1xn = O(n)
+
+
+# PROBLEM 3
+
+- What is the time complexity of the following program?
+
+void fun(){
+
+ int i,j;                   ->O(1)
+ for(i=1;i<n/3;i++){
+
+  for(j=1;j<=n;j+=4){
+
+   printf("Hello World");
+  }
+ }
+}
+
+EXPLANATION:
+first for loop
+iter 1; i=1
+iter 2; i=2
+iter 3; 1=3
+
+iter k; i=k<n/3
+
+k<n/3                     ->O(n)
+
+second for loop
+iter 1; j=1
+iter 2; j=1+4
+iter 3; j=1+4+4=1+2*4
+
+iter k; j=1+(k-1)*4=n
+
+k-1=n-1/4
+k=(n-1/4)+1                     ->O(n)
+
+TIME COMPLEXITY:
+
+1xnxn = O(n2)
